@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - EstampArt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>EstampArt</h1>
+        <p>Tu tienda online de poleras y estampados únicos</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="Index.html">Inicio</a></li>
+            <li><a href="login.html">Iniciar sesión</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Crear Cuenta</h2>
+            <div class="formulario">
+                <form id="formRegistro">
+                    <label for="usuario">Usuario:</label>
+                    <input type="text" id="usuario" name="usuario" required minlength="3" placeholder="Elige un usuario">
+
+                    <label for="clave">Contraseña:</label>
+                    <input type="password" id="clave" name="clave" required minlength="4" placeholder="Mínimo 4 caracteres">
+
+                    <button type="submit">Registrarse</button>
+                    <div id="resultado"></div>
+                </form>
+                <p style="margin-top:1rem; text-align:center;">
+                    ¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>EstampArt - Programación Web &copy; 2026</p>
+    </footer>
+
+    <script>
+        document.getElementById('formRegistro').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const resultado = document.getElementById('resultado');
+            const datos = {
+                usuario: document.getElementById('usuario').value.trim(),
+                clave: document.getElementById('clave').value.trim()
+            };
+            try {
+                const respuesta = await fetch('/auth/registro', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datos)
+                });
+                const json = await respuesta.json();
+                if (json.ok) {
+                    resultado.textContent = '✔ ' + json.mensaje;
+                    resultado.style.color = 'green';
+                    setTimeout(() => { window.location.href = '/login'; }, 1200);
+                } else {
+                    resultado.textContent = '✖ ' + json.mensaje;
+                    resultado.style.color = 'red';
+                }
+            } catch (error) {
+                resultado.textContent = 'Error al conectar con el servidor';
+                resultado.style.color = 'red';
+            }
+        });
+    </script>
+
+</body>
+</html>

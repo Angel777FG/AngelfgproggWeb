@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstampArt - Tienda de Estampados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>EstampArt</h1>
+        <p>Tu tienda online de poleras y estampados únicos</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#novedades">Novedades</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="login.html">Iniciar sesión</a></li>
+            <li><a href="contactos.html">Ver contactos</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="productos">
+            <h2>Nuestros Estampados</h2>
+
+            <div class="cards">
+                <article class="card">
+                    <div class="card-img placeholder">🎮</div>
+                    <h3>Polera Gamer Pro</h3>
+                    <p>Diseño exclusivo para gamers con gráficas en alta resolución.</p>
+                    <span class="precio-tag">$9.990</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-img placeholder">🐉</div>
+                    <h3>Polera Anime Dragon</h3>
+                    <p>Estampado de anime con colores vibrantes y tela premium.</p>
+                    <span class="precio-tag">$11.990</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-img placeholder">🏀</div>
+                    <h3>Polera Street NBA</h3>
+                    <p>Estilo urbano con diseño deportivo inspirado en la NBA.</p>
+                    <span class="precio-tag">$10.490</span>
+                </article>
+            </div>
+        </section>
+
+        <section id="novedades">
+            <h2>Novedades y Colecciones</h2>
+            <div class="novedades-grid">
+                <div class="novedad-box">
+                    <div class="novedad-icon">🎨</div>
+                    <h3>Colección Arte Urbano</h3>
+                    <p>Diseños únicos de artistas locales. Edición limitada disponible solo en nuestra tienda.</p>
+                </div>
+                <div class="novedad-box">
+                    <div class="novedad-icon">🎵</div>
+                    <h3>Colección Música</h3>
+                    <p>Homenajes a bandas y géneros icónicos. Rock, reggaetón, hip-hop y más.</p>
+                </div>
+                <div class="novedad-box">
+                    <div class="novedad-icon">🌟</div>
+                    <h3>Diseño Personalizado</h3>
+                    <p>¿Tienes una idea? Contáctanos y creamos tu estampado a medida.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <h2>Formulario de Contacto</h2>
+
+            <div class="formulario">
+                <form id="formularioContacto">
+                    <label for="nombre">Nombre:</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        required
+                        minlength="3"
+                        placeholder="Ingresa tu nombre">
+
+                    <label for="correo">Correo:</label>
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        required
+                        placeholder="correo@ejemplo.com">
+
+                    <label for="asunto">Asunto:</label>
+                    <input
+                        type="text"
+                        id="asunto"
+                        name="asunto"
+                        required
+                        minlength="3"
+                        placeholder="Escribe el asunto">
+
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea
+                        id="mensaje"
+                        name="mensaje"
+                        required
+                        minlength="10"
+                        placeholder="Escribe tu mensaje"></textarea>
+
+                    <button type="submit">Enviar</button>
+
+                    <div id="resultado"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>EstampArt - Programación Web &copy; 2026</p>
+    </footer>
+
+    <script>
+        const formulario = document.getElementById('formularioContacto');
+        const resultado = document.getElementById('resultado');
+
+        formulario.addEventListener('submit', async function(evento) {
+            evento.preventDefault();
+
+            const datos = {
+                nombre: document.getElementById('nombre').value.trim(),
+                correo: document.getElementById('correo').value.trim(),
+                asunto: document.getElementById('asunto').value.trim(),
+                mensaje: document.getElementById('mensaje').value.trim()
+            };
+
+            try {
+                const respuesta = await fetch('/api/contactos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datos)
+                });
+
+                const json = await respuesta.json();
+
+                if (json.ok) {
+                    resultado.textContent = json.mensaje;
+                    resultado.style.color = 'green';
+                    formulario.reset();
+                    setTimeout(() => { window.location.href = '/gracias'; }, 1000);
+                } else {
+                    resultado.textContent = json.mensaje;
+                    resultado.style.color = 'red';
+                }
+            } catch (error) {
+                resultado.textContent = 'Error al conectar con el servidor';
+                resultado.style.color = 'red';
+            }
+        });
+    </script>
+
+</body>
+</html>

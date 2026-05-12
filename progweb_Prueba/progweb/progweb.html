@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Profesional - Derivadas y Matemática</title>
+  <link rel="stylesheet" href="web.css">
+</head>
+<body>
+  <header>
+    <h1>Explorando las Derivadas</h1>
+    <p>Una introducción visual y práctica al cálculo diferencial.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#seccion1">Conceptos</a></li>
+      <li><a href="#seccion2">Tabla de ejemplos</a></li>
+      <li><a href="#seccion3">Formulario</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="seccion1">
+      <h2>Conceptos Clave</h2>
+      <p>La derivada mide cómo cambia una función respecto a su variable. Es esencial en física, economía y programación.</p>
+    </section>
+
+    <section id="seccion2">
+      <h2>Tabla de Ejemplos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Función</th>
+            <th>Derivada</th>
+            <th>Aplicación</th>
+          </tr>
+        </thead>
+        <tbody id="tablaDatos"></tbody>
+      </table>
+    </section>
+
+    <section id="seccion3">
+      <h2>Formulario de Contacto</h2>
+      <form id="formulario">
+        <label>Nombre:
+          <input type="text" name="nombre" required minlength="3" maxlength="30">
+        </label>
+        <label>Correo:
+          <input type="email" name="correo" required>
+        </label>
+        <label>Teléfono:
+          <input type="tel" name="telefono" pattern="[0-9]{9}" placeholder="Ej: 987654321" required>
+        </label>
+        <label>Fecha de consulta:
+          <input type="date" name="fecha" required>
+        </label>
+        <label>Motivo:
+          <select name="motivo" required>
+            <option value="">Seleccione...</option>
+            <option value="consulta">Consulta</option>
+            <option value="sugerencia">Sugerencia</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Explorando las Derivadas | Contacto: info@derivadaspro.com</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

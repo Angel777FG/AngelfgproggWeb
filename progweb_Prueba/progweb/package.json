@@ -1,0 +1,24 @@
+{
+  "name": "progweb",
+  "version": "1.0.0",
+  "description": "Página profesional sobre derivadas y matemática con HTML, CSS, JS y JSON.",
+  "main": "Script.js",
+  "scripts": {
+    "start": "echo 'Abre progweb.html en tu navegador o usa Live Server'",
+    "test": "echo 'No hay tests definidos'"
+  },
+  "keywords": [
+    "derivadas",
+    "matematica",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Ange",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0"
+  }
+}

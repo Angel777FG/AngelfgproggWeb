@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos - EstampArt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>EstampArt</h1>
+        <p>Tu tienda online de poleras y estampados únicos</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="Index.html">Inicio</a></li>
+            <li><a href="#" id="btnLogout">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Lista de Contactos</h2>
+            <div id="listaContactos">
+                <p>Cargando contactos...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>EstampArt - Programación Web &copy; 2026</p>
+    </footer>
+
+    <script>
+        async function cargarContactos() {
+            try {
+                const respuesta = await fetch('/api/contactos');
+                const json = await respuesta.json();
+                const contenedor = document.getElementById('listaContactos');
+
+                if (!json.ok || json.datos.length === 0) {
+                    contenedor.innerHTML = '<p>No hay contactos registrados aún.</p>';
+                    return;
+                }
+
+                let html = '<table><thead><tr><th>Nombre</th><th>Correo</th><th>Asunto</th><th>Fecha</th></tr></thead><tbody>';
+                for (const c of json.datos) {
+                    html += `<tr><td>${c.nombre}</td><td>${c.correo}</td><td>${c.asunto}</td><td>${c.fecha}</td></tr>`;
+                }
+                html += '</tbody></table>';
+                contenedor.innerHTML = html;
+            } catch (error) {
+                document.getElementById('listaContactos').innerHTML = '<p style="color:red">Error al cargar contactos. Debes iniciar sesión.</p>';
+            }
+        }
+
+        document.getElementById('btnLogout').addEventListener('click', async function(e) {
+            e.preventDefault();
+            await fetch('/auth/logout', { method: 'POST' });
+            window.location.href = '/login';
+        });
+
+        cargarContactos();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+[
+  {
+    "funcion": "f(x) = x^3 + 2x^2 - 5x + 7",
+    "derivada": "f'(x) = 3x^2 + 4x - 5",
+    "aplicacion": "Cálculo de velocidad instantánea"
+  },
+  {
+    "funcion": "g(x) = sin(x)",
+    "derivada": "g'(x) = cos(x)",
+    "aplicacion": "Oscilaciones y ondas"
+  },
+  {
+    "funcion": "h(x) = e^x",
+    "derivada": "h'(x) = e^x",
+    "aplicacion": "Crecimiento exponencial"
+  }
+]
